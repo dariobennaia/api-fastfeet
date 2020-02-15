@@ -1,3 +1,5 @@
+require('dotenv/config');
+
 const { JWT_SECRET } = process.env;
 
 export default {
