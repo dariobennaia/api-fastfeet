@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    container_name: db-api
+    env_file:
+      - ./.env
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_DATABASE}
+    ports:
+      - ${DB_PORT}:5432
+
+  api:
+    image: api-fastfeet
+    container_name: api-fastfeet
+    build: .
+    env_file:
+      - ./.env
+    ports:
+      - ${PORT}:${PORT}
+    restart: always
+    stdin_open: true
+    tty: true
