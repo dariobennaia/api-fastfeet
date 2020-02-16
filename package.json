@@ -14,7 +14,8 @@
     "migrate:fresh": "sequelize db:migrate:undo:all",
     "make:db": "sudo docker-compose up -d db",
     "make:migration": "sequelize migration:create --name=",
-    "make:seed": "sequelize seed:generate --name"
+    "make:seed": "sequelize seed:generate --name",
+    "make:model": "sequelize model:generate --attributes=id:number --name"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

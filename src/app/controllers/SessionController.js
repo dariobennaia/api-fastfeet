@@ -3,6 +3,11 @@ import User from '../models/User';
 import auth from '../../config/auth';
 
 class SessionController {
+  /**
+   * Gerando Token para usuário
+   * @param {*} req
+   * @param {*} res
+   */
   async store(req, res) {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email } });
