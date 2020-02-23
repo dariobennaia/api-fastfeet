@@ -3,7 +3,7 @@ version: "3"
 services:
   db:
     image: postgres
-    container_name: db-api
+    container_name: postgres-fastfeet
     env_file:
       - ./.env
     environment:
@@ -12,6 +12,24 @@ services:
       - POSTGRES_DB=${DB_DATABASE}
     ports:
       - ${DB_PORT}:5432
+
+  mongo:
+    image: mongo
+    container_name: mongo-fastfeet
+    env_file:
+      - ./.env
+    ports:
+      - ${MONGO_PORT}:27017
+    restart: always
+
+  redis:
+    image: redis
+    container_name: redis-fastfeet
+    env_file:
+      - ./.env
+    ports:
+      - ${REDIS_PORT}:6379
+    restart: always
 
   api:
     image: api-fastfeet
