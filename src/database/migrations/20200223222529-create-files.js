@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('deliverymen', {
+    return queryInterface.createTable('files', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,11 +11,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      avatar_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      email: {
+      path: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
@@ -32,6 +28,6 @@ module.exports = {
   },
 
   down: queryInterface => {
-    return queryInterface.dropTable('deliverymen');
+    return queryInterface.dropTable('files');
   },
 };

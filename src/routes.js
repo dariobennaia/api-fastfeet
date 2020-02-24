@@ -1,21 +1,15 @@
 import { Router } from 'express';
+import routes from './app/routes';
 
-import RecipientController from './app/controllers/RecipientController';
-import SessionController from './app/controllers/SessionController';
-import auth from './app/middlewares/auth';
+const router = Router();
+routes.map(({ configs = {}, routes: routesModules = [] }) => {
+  if (configs.global && configs.global.middlewares) {
+    configs.global.middlewares.map(middleware => router.use(middleware));
+  }
 
-import loginValidation from './app/validations/login';
-import recipientCreate from './app/validations/recipient/create';
-import recipientUpdate from './app/validations/recipient/update';
+  return routesModules.map(({ method, route, middlewares = [], controller }) =>
+    router[method](route, middlewares, controller)
+  );
+});
 
-const routes = Router();
-routes.post('/auth', loginValidation, SessionController.store);
-
-routes.use(auth);
-routes.get('/recipients', RecipientController.index);
-routes.get('/recipients/:id', RecipientController.show);
-routes.post('/recipients', recipientCreate, RecipientController.store);
-routes.put('/recipients/:id', recipientUpdate, RecipientController.update);
-routes.delete('/recipients/:id', RecipientController.delete);
-
-export default routes;
+export default router;
