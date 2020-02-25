@@ -1,7 +1,7 @@
 import controller from '../../controllers/DeliveryController';
 
-import validationCreate from '../../validations/deliveryman/create';
-import validationUpdate from '../../validations/deliveryman/update';
+import validationCreate from '../../validations/delivery/create';
+import validationUpdate from '../../validations/delivery/update';
 
 import auth from '../../middlewares/auth';
 

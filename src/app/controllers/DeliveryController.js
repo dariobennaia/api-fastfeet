@@ -1,7 +1,7 @@
 import Delivery from '../models/Delivery';
 import File from '../models/File';
 import Recipient from '../models/Recipient';
-import Deliverymen from '../models/Deliverymen';
+import Deliveryman from '../models/Deliveryman';
 
 class DeliveryController {
   /**
@@ -10,8 +10,8 @@ class DeliveryController {
    * @param {*} res
    */
   async index(req, res) {
-    const recipients = await Delivery.findAll({
-      attributes: ['id', 'product', 'start_date', 'end_date', 'canceled_at'],
+    const delivery = await Delivery.findAll({
+      attributes: ['id', 'product', 'startDate', 'endDate', 'canceledAt'],
       include: [
         {
           model: File,
@@ -19,13 +19,13 @@ class DeliveryController {
           attributes: ['name', 'path', 'url'],
         },
         {
-          model: Deliverymen,
+          model: Deliveryman,
           as: 'deliveryman',
           attributes: ['id', 'name', 'email'],
           include: [
             {
               model: File,
-              as: 'file',
+              as: 'avatar',
               attributes: ['name', 'path', 'url'],
             },
           ],
@@ -40,12 +40,12 @@ class DeliveryController {
             'complement',
             'state',
             'city',
-            'postcode',
+            'postCode',
           ],
         },
       ],
     });
-    return res.json(recipients);
+    return res.json(delivery);
   }
 
   /**
@@ -55,7 +55,41 @@ class DeliveryController {
    */
   async show(req, res) {
     const { id } = req.params;
-    const delivery = await Delivery.findByPk(id);
+    const delivery = await Delivery.findByPk(id, {
+      attributes: ['id', 'product', 'startDate', 'endDate', 'canceledAt'],
+      include: [
+        {
+          model: File,
+          as: 'signature',
+          attributes: ['name', 'path', 'url'],
+        },
+        {
+          model: Deliveryman,
+          as: 'deliveryman',
+          attributes: ['id', 'name', 'email'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['name', 'path', 'url'],
+            },
+          ],
+        },
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: [
+            'name',
+            'street',
+            'number',
+            'complement',
+            'state',
+            'city',
+            'postCode',
+          ],
+        },
+      ],
+    });
     return res.json(delivery || {});
   }
 
@@ -84,7 +118,7 @@ class DeliveryController {
       return res.status(400).json({ error: 'Entrega inexistente!' });
     }
 
-    await Delivery.update(body);
+    await delivery.update(body);
     return res.json(delivery);
   }
 

@@ -4,10 +4,13 @@ class Delivery extends Model {
   static init(sequelize) {
     super.init(
       {
+        recipientId: Sequelize.INTEGER,
+        deliverymanId: Sequelize.INTEGER,
+        signatureId: Sequelize.INTEGER,
         product: Sequelize.STRING,
-        start_date: Sequelize.DATE,
-        end_date: Sequelize.DATE,
-        canceled_at: Sequelize.DATE,
+        startDate: Sequelize.DATE,
+        endDate: Sequelize.DATE,
+        canceledAt: Sequelize.DATE,
       },
       {
         sequelize,
@@ -20,17 +23,17 @@ class Delivery extends Model {
 
   static associate(models) {
     this.belongsTo(models.Recipient, {
-      foreignKey: 'recipient_id',
+      foreignKey: 'recipientId',
       as: 'recipient',
     });
 
-    this.belongsTo(models.Deliverymen, {
-      foreignKey: 'deliveryman_id',
+    this.belongsTo(models.Deliveryman, {
+      foreignKey: 'deliverymanId',
       as: 'deliveryman',
     });
 
     this.belongsTo(models.File, {
-      foreignKey: 'signature_id',
+      foreignKey: 'signatureId',
       as: 'signature',
     });
   }
