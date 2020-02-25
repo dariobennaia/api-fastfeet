@@ -1,18 +1,28 @@
 import Deliverymen from '../models/Deliverymen';
+import File from '../models/File';
 
 class DeliverymanController {
   /**
-   * Mostrando destinatarios
+   * Mostrando entregadores
    * @param {*} req
    * @param {*} res
    */
   async index(req, res) {
-    const recipients = await Deliverymen.findAll();
-    res.json(recipients);
+    const recipients = await Deliverymen.findAll({
+      attributes: ['id', 'name', 'email', 'avatar_id'],
+      include: [
+        {
+          model: File,
+          as: 'file',
+          attributes: ['name', 'path', 'url'],
+        },
+      ],
+    });
+    return res.json(recipients);
   }
 
   /**
-   * Mostrando destinatario por ID
+   * Mostrando entregadores por ID
    * @param {*} req
    * @param {*} res
    */
@@ -23,7 +33,7 @@ class DeliverymanController {
   }
 
   /**
-   * Criando destinatário
+   * Criando entregadores
    * @param {*} req
    * @param {*} res
    */
@@ -34,7 +44,7 @@ class DeliverymanController {
   }
 
   /**
-   * Atualizando destinatario
+   * Atualizando entregadores
    * @param {*} req
    * @param {*} res
    */
@@ -52,7 +62,7 @@ class DeliverymanController {
   }
 
   /**
-   * Deletando Destinatario
+   * Deletando entregadores
    * @param {*} req
    * @param {*} res
    */

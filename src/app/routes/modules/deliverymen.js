@@ -1,4 +1,4 @@
-import controller from '../../controllers/RecipientController';
+import controller from '../../controllers/DeliverymanController';
 
 import validationCreate from '../../validations/deliveryman/create';
 import validationUpdate from '../../validations/deliveryman/update';
