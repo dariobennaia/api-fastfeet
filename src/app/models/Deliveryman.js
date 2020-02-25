@@ -6,7 +6,7 @@ class Deliveryman extends Model {
       {
         name: Sequelize.STRING,
         email: Sequelize.STRING,
-        // avatar_id: Sequelize.INTEGER,
+        // avatarId: Sequelize.INTEGER,
       },
       {
         sequelize,
@@ -19,7 +19,7 @@ class Deliveryman extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
+    this.belongsTo(models.File, { foreignKey: 'avatarId', as: 'avatar' });
   }
 }
 

@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 export default async (req, res, next) => {
   const schema = Yup.object().shape({
     name: Yup.string().required(),
-    avatar_id: Yup.number().required(),
+    avatarId: Yup.number().required(),
     email: Yup.string()
       .email()
       .required(),
