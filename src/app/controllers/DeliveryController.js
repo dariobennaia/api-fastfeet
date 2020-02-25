@@ -3,6 +3,9 @@ import File from '../models/File';
 import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
 
+import Queue from '../../lib/Queue';
+import DeliveryMail from '../jobs/DeliveryMail';
+
 class DeliveryController {
   /**
    * Mostrando entregas
@@ -100,8 +103,23 @@ class DeliveryController {
    */
   async store(req, res) {
     const { body } = req;
-    const delivery = await Delivery.create(body);
-    res.status(201).json(delivery);
+    const {
+      deliverymanId,
+      recipientId,
+      id: deliveryId,
+    } = await Delivery.create(body);
+
+    // enviando email para o entregador
+    const deliveryman = await Deliveryman.findByPk(deliverymanId);
+    const delivery = await Delivery.findByPk(deliveryId);
+    const recipient = await Recipient.findByPk(recipientId);
+    await Queue.add(DeliveryMail.key, {
+      deliveryman,
+      recipient,
+      delivery,
+    });
+
+    res.status(201).json(deliveryId);
   }
 
   /**
