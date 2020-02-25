@@ -2,11 +2,9 @@ import * as Yup from 'yup';
 
 export default async (req, res, next) => {
   const schema = Yup.object().shape({
-    name: Yup.string().required(),
-    avatar_id: Yup.string().required(),
-    email: Yup.string()
-      .email()
-      .required(),
+    name: Yup.string(),
+    avatar_id: Yup.number(),
+    email: Yup.string().email(),
   });
 
   if (!(await schema.isValid(req.body))) {

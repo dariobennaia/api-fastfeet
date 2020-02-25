@@ -1,4 +1,4 @@
-import Deliverymen from '../models/Deliverymen';
+import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
 
 class DeliverymanController {
@@ -8,17 +8,17 @@ class DeliverymanController {
    * @param {*} res
    */
   async index(req, res) {
-    const recipients = await Deliverymen.findAll({
-      attributes: ['id', 'name', 'email', 'avatar_id'],
+    const deliveryman = await Deliveryman.findAll({
+      attributes: ['id', 'name', 'email'],
       include: [
         {
           model: File,
-          as: 'file',
+          as: 'avatar',
           attributes: ['name', 'path', 'url'],
         },
       ],
     });
-    return res.json(recipients);
+    return res.json(deliveryman);
   }
 
   /**
@@ -28,8 +28,17 @@ class DeliverymanController {
    */
   async show(req, res) {
     const { id } = req.params;
-    const recipient = await Deliverymen.findByPk(id);
-    return res.json(recipient || {});
+    const deliveryman = await Deliveryman.findByPk(id, {
+      attributes: ['id', 'name', 'email'],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['name', 'path', 'url'],
+        },
+      ],
+    });
+    return res.json(deliveryman || {});
   }
 
   /**
@@ -39,8 +48,8 @@ class DeliverymanController {
    */
   async store(req, res) {
     const { body } = req;
-    const recipient = await Deliverymen.create(body);
-    res.status(201).json(recipient);
+    const deliveryman = await Deliveryman.create(body);
+    res.status(201).json(deliveryman);
   }
 
   /**
@@ -51,14 +60,14 @@ class DeliverymanController {
   async update(req, res) {
     const { id } = req.params;
     const { body } = req;
-    const recipient = await Deliverymen.findByPk(id);
+    const deliveryman = await Deliveryman.findByPk(id);
 
-    if (!recipient) {
+    if (!deliveryman) {
       return res.status(400).json({ error: 'Entregador inexistente!' });
     }
 
-    await Deliverymen.update(body);
-    return res.json(recipient);
+    await deliveryman.update(body);
+    return res.json(deliveryman);
   }
 
   /**
@@ -68,7 +77,7 @@ class DeliverymanController {
    */
   async delete(req, res) {
     const { id } = req.params;
-    await Deliverymen.destroy({ where: { id } });
+    await Deliveryman.destroy({ where: { id } });
     return res.json();
   }
 }
