@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize';
+import mongoose from 'mongoose';
 import databaseConfig from '../config/database';
 
 import User from '../app/models/User';
@@ -12,6 +13,7 @@ const models = [User, Recipient, Deliveryman, File, Delivery];
 class Database {
   constructor() {
     this.init();
+    this.mongo();
   }
 
   init() {
@@ -19,6 +21,14 @@ class Database {
     models
       .map(model => model.init(this.connection))
       .map(model => model.associate && model.associate(this.connection.models));
+  }
+
+  mongo() {
+    const { MONGO_HOST, MONGO_PORT, MONGO_DATABASE } = process.env;
+    this.mongoConnection = mongoose.connect(
+      `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}`,
+      { useNewUrlParser: true, useFindAndModify: true }
+    );
   }
 }
 
