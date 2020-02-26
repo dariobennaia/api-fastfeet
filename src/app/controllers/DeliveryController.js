@@ -103,23 +103,18 @@ class DeliveryController {
    */
   async store(req, res) {
     const { body } = req;
-    const {
-      deliverymanId,
-      recipientId,
-      id: deliveryId,
-    } = await Delivery.create(body);
+    const delivery = await Delivery.create(body);
 
     // enviando email para o entregador
-    const deliveryman = await Deliveryman.findByPk(deliverymanId);
-    const delivery = await Delivery.findByPk(deliveryId);
-    const recipient = await Recipient.findByPk(recipientId);
+    const deliveryman = await Deliveryman.findByPk(delivery.deliverymanId);
+    const recipient = await Recipient.findByPk(delivery.recipientId);
     await Queue.add(DeliveryMail.key, {
       deliveryman,
       recipient,
-      delivery,
+      product: body.product,
     });
 
-    res.status(201).json(deliveryId);
+    return res.status(201).json(delivery);
   }
 
   /**

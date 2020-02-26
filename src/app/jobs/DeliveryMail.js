@@ -6,9 +6,7 @@ class DeliveryMail {
   }
 
   async handle({ data }) {
-    const { deliveryman, recipient, delivery } = data;
-
-    console.log('a fila iniciou');
+    const { deliveryman, recipient, product } = data;
 
     await Mail.sendMail({
       to: `${deliveryman.name} <${deliveryman.email}>`,
@@ -16,7 +14,7 @@ class DeliveryMail {
       template: 'delivery',
       context: {
         deliveryman: deliveryman.name,
-        product: delivery.product,
+        product,
         client: recipient.name,
         street: recipient.street,
         number: recipient.number,
@@ -26,7 +24,6 @@ class DeliveryMail {
         postCode: recipient.postCode,
       },
     });
-    console.log('asdasdasd');
   }
 }
 
