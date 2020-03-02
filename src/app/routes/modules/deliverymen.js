@@ -1,5 +1,5 @@
 import controller from '../../controllers/DeliverymanController';
-
+import DeliveryStatusController from '../../controllers/DeliveryStatusController';
 import validationCreate from '../../validations/deliveryman/create';
 import validationUpdate from '../../validations/deliveryman/update';
 
@@ -32,6 +32,11 @@ const routes = [
     method: 'delete',
     route: '/deliverymen/:id',
     controller: controller.delete,
+  },
+  {
+    method: 'get',
+    route: '/deliverymen/:id/deliveries',
+    controller: DeliveryStatusController.index,
   },
 ];
 
