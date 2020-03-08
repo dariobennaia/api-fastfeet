@@ -6,6 +6,8 @@ import Deliveryman from '../models/Deliveryman';
 import Queue from '../../lib/Queue';
 import DeliveryMail from '../jobs/DeliveryMail';
 
+import { DELIVERY_NOT_FOUND } from '../messages';
+
 class DeliveryController {
   /**
    * Mostrando entregas
@@ -128,7 +130,7 @@ class DeliveryController {
     const delivery = await Delivery.findByPk(id);
 
     if (!delivery) {
-      return res.status(400).json({ error: 'Entrega inexistente!' });
+      return res.status(400).json({ err: DELIVERY_NOT_FOUND });
     }
 
     await delivery.update(body);

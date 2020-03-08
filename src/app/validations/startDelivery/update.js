@@ -1,8 +1,14 @@
 import * as Yup from 'yup';
+import Deliveryman from '../../models/Deliveryman';
+import { DELIVERYMAN_REQUIRED, DELIVERYMAN_NOT_FOUND } from '../../messages';
 
 export default async (req, res, next) => {
   const schema = Yup.object().shape({
-    deliverymanId: Yup.number().required('Informe o entregador.'),
+    deliverymanId: Yup.number()
+      .required(DELIVERYMAN_REQUIRED)
+      .test('has-deliveryman', DELIVERYMAN_NOT_FOUND, async value =>
+        Deliveryman.findByPk(value)
+      ),
   });
 
   try {

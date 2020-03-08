@@ -7,6 +7,8 @@ import Recipient from '../models/Recipient';
 import Queue from '../../lib/Queue';
 import CancelDeliveryMail from '../jobs/CancelDeliveryMail';
 
+import { DELIVERY_NOT_FOUND } from '../messages';
+
 class ProblemController {
   /**
    * Retorna todas as encomendas com problemas.
@@ -56,7 +58,7 @@ class ProblemController {
       },
     });
     if (!delivery) {
-      return res.status(400).json({ err: 'Entrega inexistente.' });
+      return res.status(400).json({ err: DELIVERY_NOT_FOUND });
     }
 
     const deliveryProblem = await DeliveryProblem.create({
@@ -81,7 +83,7 @@ class ProblemController {
       },
     });
     if (!delivery) {
-      return res.status(400).json({ err: 'Entrega inexistente.' });
+      return res.status(400).json({ err: DELIVERY_NOT_FOUND });
     }
 
     await delivery.update({ canceledAt: new Date() });

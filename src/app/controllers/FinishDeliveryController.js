@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 import Delivery from '../models/Delivery';
-import { NO_DELIVERY_AVAILABLE } from '../messages/index';
+import { DELIVERY_NOT_FOUND } from '../messages/index';
 
 class FinishDeliveryController {
   /**
@@ -24,7 +24,7 @@ class FinishDeliveryController {
     });
 
     if (!delivery) {
-      return res.status(400).json({ err: NO_DELIVERY_AVAILABLE });
+      return res.status(400).json({ err: DELIVERY_NOT_FOUND });
     }
 
     await delivery.update({ signatureId, endDate: new Date() });

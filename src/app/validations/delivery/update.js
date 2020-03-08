@@ -1,10 +1,21 @@
 import * as Yup from 'yup';
+import Recipient from '../../models/Recipient';
+import Deliveryman from '../../models/Deliveryman';
+import { RECIPIENT_NOT_FOUND, DELIVERYMAN_NOT_FOUND } from '../../messages';
 
 export default async (req, res, next) => {
   const schema = Yup.object().shape({
     product: Yup.string(),
-    recipientId: Yup.number(),
-    deliverymanId: Yup.number(),
+    recipientId: Yup.number().test(
+      'has-recipient',
+      RECIPIENT_NOT_FOUND,
+      async value => Recipient.findByPk(value)
+    ),
+    deliverymanId: Yup.number().test(
+      'has-deliveryman',
+      DELIVERYMAN_NOT_FOUND,
+      async value => Deliveryman.findByPk(value)
+    ),
   });
 
   try {

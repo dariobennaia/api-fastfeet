@@ -1,12 +1,13 @@
 import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
 import auth from '../../config/auth';
+import { INVALID_TOKEN } from '../messages';
 
 export default async (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    return res.status(401).json({ error: 'Token não informado!' });
+    return res.status(401).json({ err: INVALID_TOKEN });
   }
 
   const [, token] = authHeader.split(' ');
@@ -16,6 +17,6 @@ export default async (req, res, next) => {
     req.userId = user.id;
     return next();
   } catch (err) {
-    return res.status(401).json('Token inválido!');
+    return res.status(401).json({ err: INVALID_TOKEN });
   }
 };

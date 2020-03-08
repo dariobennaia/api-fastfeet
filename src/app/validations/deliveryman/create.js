@@ -1,17 +1,24 @@
 import * as Yup from 'yup';
 import File from '../../models/File';
+import {
+  DELIVERYMAN_NAME_REQUIRED,
+  AVATAR_REQUIRED,
+  FILE_NOT_FOUND,
+  INVALID_MAIL,
+  MAIL_REQUIRED,
+} from '../../messages';
 
 export default async (req, res, next) => {
   const schema = Yup.object().shape({
-    name: Yup.string().required('Informe o nome.'),
+    name: Yup.string().required(DELIVERYMAN_NAME_REQUIRED),
     avatarId: Yup.number()
-      .required('Informe o avatar.')
-      .test('has-recipient', 'Arquivo inexistente.', async value =>
+      .required(AVATAR_REQUIRED)
+      .test('has-recipient', FILE_NOT_FOUND, async value =>
         File.findByPk(value)
       ),
     email: Yup.string()
-      .email('E-mail inválido.')
-      .required('Informe um E-mail.'),
+      .email(INVALID_MAIL)
+      .required(MAIL_REQUIRED),
   });
 
   try {

@@ -36,7 +36,7 @@ class Queue {
   }
 
   handleFailure(job, err) {
-    console.log('error', err);
+    console.log('err', err);
   }
 }
 

@@ -1,23 +1,31 @@
 import * as Yup from 'yup';
 import Recipient from '../../models/Recipient';
 import Deliveryman from '../../models/Deliveryman';
+import {
+  PRODUCT_REQUIRED,
+  RECIPIENT_REQUIRED,
+  RECIPIENT_NOT_FOUND,
+  DELIVERYMAN_REQUIRED,
+  DELIVERYMAN_NOT_FOUND,
+  DATE_START_NOT_VALID,
+} from '../../messages';
 
 export default async (req, res, next) => {
   const schema = Yup.object().shape({
-    product: Yup.string().required('Informe o nome do produto.'),
+    product: Yup.string().required(PRODUCT_REQUIRED),
     recipientId: Yup.number()
-      .required('Informe o destinatario.')
-      .test('has-recipient', 'Destinatario inexistente.', async value =>
+      .required(RECIPIENT_REQUIRED)
+      .test('has-recipient', RECIPIENT_NOT_FOUND, async value =>
         Recipient.findByPk(value)
       ),
     deliverymanId: Yup.number()
-      .required('Informe o entregador.')
-      .test('has-deliveryman', 'Entregador inexistente.', async value =>
+      .required(DELIVERYMAN_REQUIRED)
+      .test('has-deliveryman', DELIVERYMAN_NOT_FOUND, async value =>
         Deliveryman.findByPk(value)
       ),
     dateStart: Yup.mixed().test(
       'not-valid',
-      'A data de inicio só pode ser informada quando o pedido for retirado',
+      DATE_START_NOT_VALID,
       value => !value
     ),
   });

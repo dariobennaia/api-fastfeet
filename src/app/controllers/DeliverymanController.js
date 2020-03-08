@@ -1,6 +1,8 @@
 import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
 
+import { DELIVERYMAN_NOT_FOUND } from '../messages';
+
 class DeliverymanController {
   /**
    * Mostrando entregadores
@@ -63,7 +65,7 @@ class DeliverymanController {
     const deliveryman = await Deliveryman.findByPk(id);
 
     if (!deliveryman) {
-      return res.status(400).json({ error: 'Entregador inexistente!' });
+      return res.status(400).json({ err: DELIVERYMAN_NOT_FOUND });
     }
 
     await deliveryman.update(body);

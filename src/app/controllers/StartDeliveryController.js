@@ -3,7 +3,7 @@ import { Op } from 'sequelize';
 import Delivery from '../models/Delivery';
 import {
   OUT_OF_TIME_FOR_DELIVERY,
-  NO_DELIVERY_AVAILABLE,
+  DELIVERY_NOT_FOUND,
   DAILY_DELIVERY_LIMIT_EXCEEDED,
 } from '../messages/index';
 
@@ -28,7 +28,7 @@ class StartDeliveryController {
       where: { deliverymanId, id, startDate: null },
     });
     if (!delivery) {
-      return res.status(400).json({ err: NO_DELIVERY_AVAILABLE });
+      return res.status(400).json({ err: DELIVERY_NOT_FOUND });
     }
 
     // checagem de entregas diárias para o entregador informado.
