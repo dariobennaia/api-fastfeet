@@ -1,4 +1,5 @@
 import Recipient from '../models/Recipient';
+import { RECIPIENT_NOT_FOUND } from '../messages';
 
 class RecipientController {
   /**
@@ -44,7 +45,7 @@ class RecipientController {
     const recipient = await Recipient.findByPk(id);
 
     if (!recipient) {
-      return res.status(400).json({ error: 'Destinatário inexistente!' });
+      return res.status(400).json({ err: RECIPIENT_NOT_FOUND });
     }
 
     await recipient.update(body);

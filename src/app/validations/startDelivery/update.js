@@ -1,22 +1,14 @@
 import * as Yup from 'yup';
-import {
-  RECIPIENT_NAME_REQUIRED,
-  STREET_REQUIRED,
-  NUMBER_REQUIRED,
-  STATE_REQUIRED,
-  CITY_REQUIRED,
-  POSTCODE_REQUIRED,
-} from '../../messages';
+import Deliveryman from '../../models/Deliveryman';
+import { DELIVERYMAN_REQUIRED, DELIVERYMAN_NOT_FOUND } from '../../messages';
 
 export default async (req, res, next) => {
   const schema = Yup.object().shape({
-    name: Yup.string().required(RECIPIENT_NAME_REQUIRED),
-    street: Yup.string().required(STREET_REQUIRED),
-    number: Yup.string().required(NUMBER_REQUIRED),
-    complement: Yup.string(),
-    state: Yup.string().required(STATE_REQUIRED),
-    city: Yup.string().required(CITY_REQUIRED),
-    postCode: Yup.string().required(POSTCODE_REQUIRED),
+    deliverymanId: Yup.number()
+      .required(DELIVERYMAN_REQUIRED)
+      .test('has-deliveryman', DELIVERYMAN_NOT_FOUND, async value =>
+        Deliveryman.findByPk(value)
+      ),
   });
 
   try {

@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { AUTH_REQUIRED } from '../messages';
 
 export default async (req, res, next) => {
   const schema = Yup.object().shape({
@@ -9,7 +10,7 @@ export default async (req, res, next) => {
   });
 
   if (!(await schema.isValid(req.body))) {
-    return res.status(422).json({ error: 'Informe o E-mail e Senha!' });
+    return res.status(422).json({ err: AUTH_REQUIRED });
   }
 
   return next();

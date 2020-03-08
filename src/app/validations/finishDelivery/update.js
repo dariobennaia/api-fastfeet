@@ -1,22 +1,23 @@
 import * as Yup from 'yup';
+import File from '../../models/File';
+import Deliveryman from '../../models/Deliveryman';
 import {
-  RECIPIENT_NAME_REQUIRED,
-  STREET_REQUIRED,
-  NUMBER_REQUIRED,
-  STATE_REQUIRED,
-  CITY_REQUIRED,
-  POSTCODE_REQUIRED,
+  DELIVERYMAN_REQUIRED,
+  SIGNATURE_REQUIRED,
+  FILE_NOT_FOUND,
+  DELIVERYMAN_NOT_FOUND,
 } from '../../messages';
 
 export default async (req, res, next) => {
   const schema = Yup.object().shape({
-    name: Yup.string().required(RECIPIENT_NAME_REQUIRED),
-    street: Yup.string().required(STREET_REQUIRED),
-    number: Yup.string().required(NUMBER_REQUIRED),
-    complement: Yup.string(),
-    state: Yup.string().required(STATE_REQUIRED),
-    city: Yup.string().required(CITY_REQUIRED),
-    postCode: Yup.string().required(POSTCODE_REQUIRED),
+    deliverymanId: Yup.number()
+      .required(DELIVERYMAN_REQUIRED)
+      .test('has-deliveryman', DELIVERYMAN_NOT_FOUND, async value =>
+        Deliveryman.findByPk(value)
+      ),
+    signatureId: Yup.number()
+      .required(SIGNATURE_REQUIRED)
+      .test('has-file', FILE_NOT_FOUND, async value => File.findByPk(value)),
   });
 
   try {

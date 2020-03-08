@@ -1,19 +1,27 @@
 import * as Yup from 'yup';
-import File from '../../models/File';
-import { INVALID_MAIL, FILE_NOT_FOUND } from '../../messages';
+import Recipient from '../../models/Recipient';
+import Deliveryman from '../../models/Deliveryman';
+import { RECIPIENT_NOT_FOUND, DELIVERYMAN_NOT_FOUND } from '../../messages';
 
 export default async (req, res, next) => {
   const schema = Yup.object().shape({
-    name: Yup.string(),
-    avatarId: Yup.number().test(
+    product: Yup.string(),
+    recipientId: Yup.number().test(
       'has-recipient',
-      FILE_NOT_FOUND,
+      RECIPIENT_NOT_FOUND,
       async value => {
         if (!value) return true;
-        return File.findByPk(value);
+        return Recipient.findByPk(value);
       }
     ),
-    email: Yup.string().email(INVALID_MAIL),
+    deliverymanId: Yup.number().test(
+      'has-deliveryman',
+      DELIVERYMAN_NOT_FOUND,
+      async value => {
+        if (!value) return true;
+        return Deliveryman.findByPk(value);
+      }
+    ),
   });
 
   try {
