@@ -19,7 +19,7 @@ class StartDeliveryController {
 
     // checagem da janela de horario para entregas.
     const currentHours = format(new Date(), 'HH');
-    if (currentHours < '08' || currentHours >= '22') {
+    if (currentHours < '08' || currentHours >= '18') {
       return res.status(400).json({ err: OUT_OF_TIME_FOR_DELIVERY });
     }
 

@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import Recipient from '../../models/Recipient';
-import Deliveriman from '../../models/Deliveryman';
+import Deliveryman from '../../models/Deliveryman';
 
 export default async (req, res, next) => {
   const schema = Yup.object().shape({
@@ -13,7 +13,7 @@ export default async (req, res, next) => {
     deliverymanId: Yup.number()
       .required('Informe o entregador.')
       .test('has-deliveryman', 'Entregador inexistente.', async value =>
-        Deliveriman.findByPk(value)
+        Deliveryman.findByPk(value)
       ),
     dateStart: Yup.mixed().test(
       'not-valid',

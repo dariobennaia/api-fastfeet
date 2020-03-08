@@ -11,9 +11,18 @@ export default async (req, res, next) => {
     postCode: Yup.string(),
   });
 
-  if (!(await schema.isValid(req.body))) {
-    return res.status(422).json({ error: 'Dados invalidos!' });
+  try {
+    await schema.validate(req.body, { stripUnknown: true, abortEarly: false });
+    return next();
+  } catch ({ inner }) {
+    let validations = {};
+    inner.forEach(({ path, message }) => {
+      if (!validations[path]) {
+        validations = { [path]: [message], ...validations };
+      } else {
+        validations[path].push(message);
+      }
+    });
+    return res.status(422).json({ err: validations });
   }
-
-  return next();
 };
