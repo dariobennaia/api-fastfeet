@@ -46,12 +46,14 @@ const routes = [
     route: '/deliveries/:id/start',
     controller: startDeliveryController.update,
     middlewares: [startDeliveryValidation],
+    noGlobals: [auth],
   },
   {
     method: 'put',
     route: '/deliveries/:id/finish',
     controller: finishDeliveryController.update,
     middlewares: [finishDeliveryValidation],
+    noGlobals: [auth],
   },
   {
     method: 'get',
@@ -63,6 +65,7 @@ const routes = [
     route: '/deliveries/:id/problems',
     controller: ProblemController.store,
     middlewares: [createProblemValidation],
+    noGlobals: [auth],
   },
 ];
 

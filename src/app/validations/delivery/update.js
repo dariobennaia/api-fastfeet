@@ -9,12 +9,18 @@ export default async (req, res, next) => {
     recipientId: Yup.number().test(
       'has-recipient',
       RECIPIENT_NOT_FOUND,
-      async value => Recipient.findByPk(value)
+      async value => {
+        if (!value) return true;
+        return Recipient.findByPk(value);
+      }
     ),
     deliverymanId: Yup.number().test(
       'has-deliveryman',
       DELIVERYMAN_NOT_FOUND,
-      async value => Deliveryman.findByPk(value)
+      async value => {
+        if (!value) return true;
+        return Deliveryman.findByPk(value);
+      }
     ),
   });
 

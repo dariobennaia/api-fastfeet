@@ -37,6 +37,7 @@ const routes = [
     method: 'get',
     route: '/deliverymen/:id/deliveries',
     controller: DeliveryStatusController.index,
+    noGlobals: [auth],
   },
 ];
 

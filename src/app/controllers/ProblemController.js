@@ -80,6 +80,7 @@ class ProblemController {
       where: {
         id: deliveryId,
         canceledAt: null,
+        endDate: null,
       },
     });
     if (!delivery) {
