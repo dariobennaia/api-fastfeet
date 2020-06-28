@@ -2,7 +2,6 @@ import * as Yup from 'yup';
 import File from '../../models/File';
 import {
   DELIVERYMAN_NAME_REQUIRED,
-  AVATAR_REQUIRED,
   FILE_NOT_FOUND,
   INVALID_MAIL,
   MAIL_REQUIRED,
@@ -11,11 +10,10 @@ import {
 export default async (req, res, next) => {
   const schema = Yup.object().shape({
     name: Yup.string().required(DELIVERYMAN_NAME_REQUIRED),
-    avatarId: Yup.number()
-      .required(AVATAR_REQUIRED)
-      .test('has-recipient', FILE_NOT_FOUND, async value =>
-        File.findByPk(value)
-      ),
+    avatarId: Yup.number().test('has-file', FILE_NOT_FOUND, async value => {
+      if (!value) return true;
+      return File.findByPk(value);
+    }),
     email: Yup.string()
       .email(INVALID_MAIL)
       .required(MAIL_REQUIRED),

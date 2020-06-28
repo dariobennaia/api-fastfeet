@@ -3,6 +3,7 @@ export const DAILY_DELIVERY_LIMIT_EXCEEDED =
   'Você atingiu o limite de 5 entregas diárias.';
 export const DELIVERY_NOT_FOUND = 'Entrega inexistente.';
 export const DELIVERYMAN_NOT_FOUND = 'Entregador inexistente.';
+export const DELIVERYMAN_ALREADY_EXISTS = 'Entregador já cadastrado.';
 export const RECIPIENT_NOT_FOUND = 'Destinatário inexistente.';
 export const INVALID_AUTH = 'E-mail ou senha inválidos.';
 export const INVALID_TOKEN = 'Token inválido.';

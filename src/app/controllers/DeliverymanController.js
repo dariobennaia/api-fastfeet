@@ -1,7 +1,8 @@
+import { Op } from 'sequelize';
 import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
 
-import { DELIVERYMAN_NOT_FOUND } from '../messages';
+import { DELIVERYMAN_NOT_FOUND, DELIVERYMAN_ALREADY_EXISTS } from '../messages';
 
 class DeliverymanController {
   /**
@@ -10,6 +11,14 @@ class DeliverymanController {
    * @param {*} res
    */
   async index(req, res) {
+    const { q } = req.query;
+    let where = {};
+
+    if (q) {
+      where = {
+        name: { [Op.iLike]: `%${q}%` },
+      };
+    }
     const deliveryman = await Deliveryman.findAll({
       attributes: ['id', 'name', 'email'],
       include: [
@@ -19,6 +28,8 @@ class DeliverymanController {
           attributes: ['name', 'path', 'url'],
         },
       ],
+      where,
+      order: [['id', 'ASC']],
     });
     return res.json(deliveryman);
   }
@@ -50,8 +61,17 @@ class DeliverymanController {
    */
   async store(req, res) {
     const { body } = req;
+
+    const deliverymanExists = await Deliveryman.findOne({
+      where: { email: body.email },
+    });
+
+    if (deliverymanExists) {
+      return res.status(400).json({ err: DELIVERYMAN_ALREADY_EXISTS });
+    }
+
     const deliveryman = await Deliveryman.create(body);
-    res.status(201).json(deliveryman);
+    return res.status(201).json(deliveryman);
   }
 
   /**

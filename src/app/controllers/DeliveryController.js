@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import Delivery from '../models/Delivery';
 import File from '../models/File';
 import Recipient from '../models/Recipient';
@@ -15,6 +16,15 @@ class DeliveryController {
    * @param {*} res
    */
   async index(req, res) {
+    const { q } = req.query;
+    let where = {};
+
+    if (q) {
+      where = {
+        product: { [Op.iLike]: `%${q}%` },
+      };
+    }
+
     const delivery = await Delivery.findAll({
       attributes: ['id', 'product', 'startDate', 'endDate', 'canceledAt'],
       include: [
@@ -49,6 +59,8 @@ class DeliveryController {
           ],
         },
       ],
+      where,
+      order: [['id', 'ASC']],
     });
     return res.json(delivery);
   }
@@ -84,6 +96,7 @@ class DeliveryController {
           model: Recipient,
           as: 'recipient',
           attributes: [
+            'id',
             'name',
             'street',
             'number',

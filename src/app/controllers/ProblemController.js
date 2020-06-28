@@ -16,27 +16,15 @@ class ProblemController {
    * @param {*} res
    */
   async index(req, res) {
-    const deliveriesProblems = await Delivery.findAll({
-      attributes: ['id', 'product', 'startDate', 'canceledAt', 'createdAt'],
-      include: [
-        {
-          model: Recipient,
-          as: 'recipient',
-          attributes: ['id', 'name', 'postCode'],
-        },
-        {
-          model: Deliveryman,
-          as: 'deliveryman',
-          attributes: ['id', 'name'],
-        },
-        {
-          model: DeliveryProblem,
-          as: 'problems',
-          attributes: ['id', 'description'],
-        },
-      ],
-      where: { '$problems.id$': { [Op.ne]: null } },
-    });
+    const { q } = req.query;
+    let where = {};
+
+    if (q) {
+      where = {
+        description: { [Op.iLike]: `%${q}%` },
+      };
+    }
+    const deliveriesProblems = await DeliveryProblem.findAll({ where });
     return res.json(deliveriesProblems);
   }
 
