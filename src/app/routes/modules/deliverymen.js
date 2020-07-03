@@ -15,6 +15,7 @@ const routes = [
     method: 'get',
     route: '/deliverymen/:id',
     controller: controller.show,
+    noGlobals: [auth],
   },
   {
     method: 'post',
@@ -27,6 +28,7 @@ const routes = [
     route: '/deliverymen/:id',
     controller: controller.update,
     middlewares: [validationUpdate],
+    noGlobals: [auth],
   },
   {
     method: 'delete',

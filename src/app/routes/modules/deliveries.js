@@ -59,6 +59,7 @@ const routes = [
     method: 'get',
     route: '/deliveries/:id/problems',
     controller: DeliveryProblemController.show,
+    noGlobals: [auth],
   },
   {
     method: 'post',
