@@ -23,6 +23,7 @@ class DeliveryProblemController {
         attributes: ['id', 'product', 'startDate', 'endDate', 'canceledAt'],
       },
       attributes: ['id', 'description', 'createdAt'],
+      order: [['id', 'DESC']],
     });
     return res.json(deliveriesProblems);
   }

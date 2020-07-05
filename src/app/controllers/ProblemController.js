@@ -41,6 +41,7 @@ class ProblemController {
       where: {
         id: deliveryId,
         startDate: { [Op.ne]: null },
+        canceledAt: null,
         endDate: null,
         deliverymanId,
       },
