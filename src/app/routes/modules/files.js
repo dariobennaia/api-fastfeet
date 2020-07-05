@@ -1,5 +1,4 @@
 import multer from 'multer';
-import auth from '../../middlewares/auth';
 import multerConfig from '../../../config/multer';
 import controller from '../../controllers/FileController';
 
@@ -14,10 +13,6 @@ const routes = [
   },
 ];
 
-const configs = {
-  global: {
-    middlewares: [auth],
-  },
-};
+const configs = {};
 
 export default { routes, configs };
