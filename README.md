@@ -1,118 +1,194 @@
 <h1 align="center">
-  <img alt="Fastfeet" title="Fastfeet" src=".github/logo.png" width="300px" />
+  <img alt="Fastfeet" title="Fastfeet" src="./.github/logo.png" width="300px" />
 </h1>
 
-<h3 align="center">
-  Desafio 2: FastFeet, o início
-</h3>
-
-<h3 align="center">
-  :warning: Etapa 1/4 do Desafio Final :warning:
-</h3>
-
-<p>Esse desafio faz parte do Desafio Final, que é uma aplicação completa (Back-end, Front-end e Mobile) que é avaliada para emissão do Certificado do Bootcamp GoStack, por isso é fundamental que ele seja feito com muito empenho!</p>
-
-<blockquote align="center">“Não espere para plantar, apenas tenha paciência para colher”!</blockquote>
+<p align="center">
+  <img src=".github/nodejs.svg" alt="ReactJS" />&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src=".github/docker.svg" alt="ReactJS" />&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src=".github/mongo.svg" alt="ReactJS" />&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src=".github/postgres.svg" alt="ReactJS" />&nbsp;&nbsp;&nbsp;&nbsp;
+  <img src=".github/terminal.svg" alt="ReactJS" />
+</a>
 
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/rocketseat/bootcamp-gostack-desafio-02?color=%2304D361">
-
-  <a href="https://rocketseat.com.br">
-    <img alt="Made by Rocketseat" src="https://img.shields.io/badge/made%20by-Rocketseat-%2304D361">
-  </a>
-
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361">
-
-  <a href="https://github.com/Rocketseat/bootcamp-gostack-desafio-02/stargazers">
-    <img alt="Stargazers" src="https://img.shields.io/github/stars/rocketseat/bootcamp-gostack-desafio-02?style=social">
-  </a>
+  <a href="#rocket-sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#pushpin-funcionalidades">Funcionalidades</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#hammer-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#computer-como-usar">Como usar</a>&nbsp;&nbsp;&nbsp;
 </p>
 
-<p align="center">
-  <a href="#rocket-sobre-o-desafio">Sobre o desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-entrega">Entrega</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
-</p>
+## :rocket: Sobre
+Este é um projeto fictício feito para uma gestão de encomendas de uma transportadora chamada FastFeet.
 
-## :rocket: Sobre o desafio
+Esta é a 1/3 partes de um projeto como todo. O mesmo foi construído utilizando nodejs e espress.
 
-A aplicação que iremos dar início ao desenvolvimento a partir de agora é um app para uma transportadora fictícia, o FastFeet.
+Se você ainda não baixou as partes (2/3) ou (3/3), você vai encontrar elas abaixo, siga os passos para uma instalação correta:
+- [(2/3) Api](https://github.com/dariobennaia/web-fastfeet)
+- [(3/3) Api](https://github.com/dariobennaia/mobile-fastfeet)
 
-Nesse primeiro desafio vamos criar algumas funcionalidades básicas que aprendemos ao longo das aulas até aqui. Esse projeto será desenvolvido aos poucos até o fim da sua jornada onde você terá uma aplicação completa envolvendo back-end, front-end e mobile, que será utilizada para a **certificação do bootcamp**, então, bora pro código!
+## :pushpin: Funcionalidades
 
-### **Um pouco sobre as ferramentas**
+Uma descrição resumida das funcionalidades presentes na aplicação.
+### Autenticação
+Funcionalidade responsável pelo gerenciamento de acesso a aplicação e todos os demais módulos a seguir.
 
-Você deverá criar a aplicação do zero utilizando o [Express](https://expressjs.com/), além de precisar configurar as seguintes ferramentas:
+### Gestão de encomendas (web)
+O gerenciamento de encomendas se divide nas seguintes partes.
 
-- Sucrase + Nodemon;
-- ESLint + Prettier + EditorConfig;
-- Sequelize (Utilize PostgreSQL ou MySQL);
+1. Listagem: Funcionalidade resposável por listar todas as encomendas criadas.
+2. Informação: Funcionalidade responsável por exibir as informações da encomenda.
+2. Cadastro: Funcionalidade resposável por cadastrar encomendas.
+3. Edição: Funcionalidade resposável por editar/atualizar as informções referentes a uma encomenda criada.
+4. Exclusão: Funcionalidade resposável por excluir as encomendas criadas.
 
-### **Funcionalidades**
+### Gestão de destinatários (web)
+O gerenciamento de destinatários se divide nas seguintes partes.
 
-Abaixo estão descritas as funcionalidades que você deve adicionar em sua aplicação.
+1. Listagem: Funcionalidade resposável por listar todas os destinatários criados.
+2. Informação: Funcionalidade responsável por exibir as informações do destinatário.
+2. Cadastro: Funcionalidade resposável por cadastrar destinatários.
+3. Edição: Funcionalidade resposável por editar/atualizar as informções referentes a um destinatário criado.
+4. Exclusão: Funcionalidade resposável por excluir destinatários criados.
 
-### **1. Autenticação**
+### Gestão de entregadores (web)
+O gerenciamento de entregadores se divide nas seguintes partes.
 
-Permita que um usuário se autentique em sua aplicação utilizando e-mail e uma senha.
+1. Listagem: Funcionalidade resposável por listar todas os entregadores criados.
+2. Informação: Funcionalidade responsável por exibir as informações do entregador.
+2. Cadastro: Funcionalidade resposável por cadastrar entregadores.
+3. Edição: Funcionalidade resposável por editar/atualizar as informções referentes a um entregador criado.
+4. Exclusão: Funcionalidade resposável por excluir os entregadores criados.
 
-Crie um usuário administrador utilizando a funcionalidade de [seeds do sequelize](https://sequelize.org/master/manual/migrations.html#creating-first-seed), essa funcionalidade serve para criarmos registros na base de dados de forma automatizada.
+### Gestão de problemas (web)
+O gerenciamento de problemas se divide nas seguintes partes.
 
-Para criar um seed utilize o comando:
+1. Listagem: Funcionalidade resposável por listar todos os problemas informados pelo entregador.
+2. Informação: Funcionalidade responsável por exibir as informações do problema.
+3. Cancelamento de entrega: Funcionalidade resposável por cancelar uma entrega com base nas informações do problema informado.
 
-    yarn sequelize seed:generate --name admin-user
+### Autenticação (mobile)
+Funcionalidade responsável pelo gerenciamento de acesso a aplicação e todos os demais módulos a seguir.
 
-No arquivo gerado na pasta `src/database/seeds` adicione o código referente à criação de um usuário administrador:
+### Gestão de encomendas (mobile)
+O gerenciamento de encomendas se divide nas seguintes partes.
 
-    const bcrypt = require("bcryptjs");
+1. Listagem: Funcionalidade resposável por listar todas as encomendas criadas.
+2. Informação: Funcionalidade responsável por exibir as informações da encomenda.
+2. Cadastro: Funcionalidade resposável por cadastrar encomendas.
+3. Edição: Funcionalidade resposável por editar/atualizar as informções referentes a uma encomenda criada.
+4. Exclusão: Funcionalidade resposável por excluir as encomendas criadas.
 
-    module.exports = {
-      up: QueryInterface => {
-        return QueryInterface.bulkInsert(
-          "users",
-          [
-            {
-              name: "Distribuidora FastFeet",
-              email: "admin@fastfeet.com",
-              password_hash: bcrypt.hashSync("123456", 8),
-              created_at: new Date(),
-              updated_at: new Date()
-            }
-          ],
-          {}
-        );
-      },
+### Gestão de destinatários
+O gerenciamento de destinatários se divide nas seguintes partes.
 
-      down: () => {}
-    };
+1. Listagem: Funcionalidade resposável por listar todas os destinatários criados.
+2. Informação: Funcionalidade responsável por exibir as informações do destinatário.
+2. Cadastro: Funcionalidade resposável por cadastrar destinatários.
+3. Edição: Funcionalidade resposável por editar/atualizar as informções referentes a um destinatário criado.
+4. Exclusão: Funcionalidade resposável por excluir destinatários criados.
 
-Agora execute:
+### Gestão de entregadores
+O gerenciamento de entregadores se divide nas seguintes partes.
 
-    yarn sequelize db:seed:all
+1. Listagem: Funcionalidade resposável por listar todas os entregadores criados.
+2. Informação: Funcionalidade responsável por exibir as informações do entregador.
+2. Cadastro: Funcionalidade resposável por cadastrar entregadores.
+3. Edição: Funcionalidade resposável por editar/atualizar as informções referentes a um entregador criado.
+4. Exclusão: Funcionalidade resposável por excluir os entregadores criados.
 
-Agora você tem um usuário na sua base de dados, utilize esse usuário para todos os logins que você fizer.
+### Gestão de problemas
+O gerenciamento de problemas se divide nas seguintes partes.
 
-- A autenticação deve ser feita utilizando JWT.
-- Realize a validação dos dados de entrada;
+1. Listagem: Funcionalidade resposável por listar todos os problemas informados pelo entregador.
+2. Informação: Funcionalidade responsável por exibir as informações do problema.
+3. Cancelamento de entrega: Funcionalidade resposável por cancelar uma entrega com base nas informações do problema informado.
 
-### 2. Gestão de destinatários
 
-Você agora precisa permitir que destinatários sejam mantidos (cadastrados/atualizados) na aplicação, e esses devem ter o **nome** do destinatário e campos de endereço: **rua**, **número**, **complemento**, **estado**, **cidade** e **CEP**.
+## :hammer: Tecnologias
+Este Projeto foi desenvolvido usando as seguintes tecnologias:
 
-Utilize uma nova tabela no banco de dados chamada `recipients` para guardar informações do destinatário.
+-  [Express](https://github.com/expressjs/express)
+-  [Squelize](https://sequelize.org/)
+-  [Nodemail](https://nodemailer.com/about/)
+-  [Multer](https://github.com/expressjs/multer)
+-  [Mongoose](https://mongoosejs.com/)
+-  [JWT](https://jwt.io/)
+-  [Dotenv](https://www.npmjs.com/package/dotenv)
+-  [Bee-queue](https://github.com/bee-queue/bee-queue)
+-  [Yup](https://www.npmjs.com/package/yup)
+-  [Date Fns](https://date-fns.org/)
 
-O cadastro de destinatários só pode ser feito por administradores autenticados na aplicação.
+## :computer: Como usar
 
-O destinatário não pode se autenticar no sistema, ou seja, não possui senha.
+Para instalar a aplicação você precisará executar os passos informados abaixo.
 
-## 📅 Entrega
+### Instalação básica
 
-Esse desafio **não precisa ser entregue** e não receberá correção. Além disso, o código fonte **não está disponível** por fazer parte do **desafio final**, que será corrigido para **certificação** do bootcamp. Após concluir o desafio, adicionar esse código ao seu Github é uma boa forma de demonstrar seus conhecimentos para oportunidades futuras.
+```bash
+# Clone o repositório
+$ git clone https://github.com/dariobennaia/api-fastfeet
 
-## :memo: Licença
+# Entre na pasta do projeto
+$ cd api-fastfeet
 
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+# Instale as dependências
+$ yarn install
+
+# Crie o arquivo .env com base no modelo .env.example e preencha suas informações corretamente.
+$ cp .env.example .env
+
+# Execute a aplicação
+$ yarn dev
+```
+
+### Instalação usando o nosso :heart: amorzinho, o [docker](https://www.docker.com/).
+
+:rotating_light: Importante! Certifique-se de que você possui o docker instalado em sua maquina. A versão usada no desenvolvimento deste projeto foi: [Docker 19.03.5](https://docs.docker.com/engine/release-notes/) e o [Docker Compose 1.25.3](https://docs.docker.com/compose/release-notes/). Para mais informações consulte a [documentação](https://www.docker.com/) oficial.
+
+```bash
+# Clone o repositório
+$ git clone https://github.com/dariobennaia/api-fastfeet
+
+# Entre na pasta do projeto
+$ cd api-fastfeet
+
+# Crie o arquivo .env com base no modelo .env.example e preencha suas informações corretamente.
+$ cp .env.example .env
+
+# Execute o gerenciador do docker para subir a aplicação
+$ docker-compose up
+```
+
+:rotating_light: Cuidado ao definir 'http://localhost:3000' nas variaveis de ambiente quando usar o docker, o mesmo pode não conseguir se comunicar.
+
+Se precisar buildar as informações novamente basta executar:
+```bash
+# Execute o gerenciador do docker para subir a aplicação
+$ docker-compose up --build
+```
+
+### :rotating_light: Importante!
+Você deve está se perguntando, Abençoado eu como que eu vou subir o banco de dados e tudo que o projeto precisa pra funcionar? Calma! Vou te ajudar.
+
+Se você estiver usando o docker basta você rodar os comandos após executar o comando `docker-compose up` em outro terminal:
+
+```bash
+# Rodando as migrations
+$ docker exec -it api-fastfeet yarn migrate
+
+# Rodando as seeds
+$ docker exec -it api-fastfeet yarn db:seeds
+```
+
+Se você não estiver usando docker basta executar na raiz do projeto:
+
+```bash
+# Rodando as migrations
+$ yarn migrate
+
+# Rodando as seeds
+$ yarn db:seeds
+```
 
 ---
-
-Feito com ♥ by Rocketseat :wave: [Entre na nossa comunidade!](https://discordapp.com/invite/gCRAFhc)
+Feito com carinho por [Dário Santos](https://www.linkedin.com/in/dario-bennaia/) :purple_heart: :rocket:!
