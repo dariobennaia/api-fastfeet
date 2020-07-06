@@ -23,8 +23,14 @@ Este é um projeto fictício feito para uma gestão de encomendas de uma transpo
 Esta é a 1/3 partes de um projeto como todo. O mesmo foi construído utilizando nodejs e espress.
 
 Se você ainda não baixou as partes (2/3) ou (3/3), você vai encontrar elas abaixo, siga os passos para uma instalação correta:
-- [(2/3) Api](https://github.com/dariobennaia/web-fastfeet)
-- [(3/3) Api](https://github.com/dariobennaia/mobile-fastfeet)
+- [(2/3) Web](https://github.com/dariobennaia/web-fastfeet)
+- [(3/3) App](https://github.com/dariobennaia/mobile-fastfeet)
+
+<br/><br/>
+O usuario para acessar a aplicação web caso você tenha executado as `seeds` é:
+
+login: admin@fastfeet.com<br/>
+senha: 123456
 
 ## :pushpin: Funcionalidades
 
