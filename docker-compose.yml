@@ -40,6 +40,10 @@ services:
       - ./.env
     ports:
       - ${PORT}:${PORT}
+    depends_on:
+      - db
+      - mongo
+      - redis
     restart: always
     stdin_open: true
     tty: true
